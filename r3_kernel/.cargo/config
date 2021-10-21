@@ -1,0 +1,3 @@
+[build]
+target = "x86_64_llvm.json"
+target-dir="../target/r3_kernel"

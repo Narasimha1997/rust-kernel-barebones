@@ -1,0 +1,18 @@
+[package]
+name = "r3_kernel"
+version = "0.1.0"
+authors = ["Narasimha1997 <yogaimpression@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[unstable]
+# enable core memory utils like memcmp, memcpy, memove etc
+build-std-features = ["compiler-builtins-mem"]
+
+# use compiler_builtins and core rust components for our kernel
+build-std = ["core", "compiler_builtins"]
+
+[dependencies]
+# TODO: in future move this to local copy
+stivale-boot = "0.2.1"
