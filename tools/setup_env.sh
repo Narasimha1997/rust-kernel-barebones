@@ -55,16 +55,17 @@ function configure_vscode () {
 
     targetpath=$PWD/r3_kernel/x86_64.json_text
     sysrootpath=$PWD/r3_kernel/target/sysroot
+    deppath= "-L dependency=$sysrootpath/lib/rustlib/x86_64-unknown-linux-gnu/lib"
 
     json_text='{
-        "rust.target": "$targetpath",
+        "rust.target": $targetpath,
         "rust.all_targets": false,
-        "rust.sysroot": "$sysrootpath",
-        "rust.rustflags": "-L dependency=$sysrootpath/lib/rustlib/x86_64-unknown-linux-gnu/lib"
+        "rust.sysroot": $sysrootpath,
+        "rust.rustflags": $deppath
     }'
 
-    jq -n --arg targetpath "$targetpath" --arg sysrootpath "$sysrootpath" $json_text >> .vscode/settings.json
-    jq -n --arg targetpath "$targetpath" --arg sysrootpath "$sysrootpath" $json_text >> r3_kernel/.vscode/settings.json
+    jq -n --arg targetpath "$targetpath" --arg sysrootpath "$sysrootpath" --arg deppath "$deppath" "$json_text" >> .vscode/settings.json
+    jq -n --arg targetpath "$targetpath" --arg sysrootpath "$sysrootpath" --arg deppath "$deppath" "$json_text" >> r3_kernel/.vscode/settings.json
 }
 
 install_qemu

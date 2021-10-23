@@ -1,0 +1,6 @@
+{
+  "rust.target": "/home/narasimha/Documents/r3/r3_kernel/x86_64.json_text",
+  "rust.all_targets": false,
+  "rust.sysroot": "/home/narasimha/Documents/r3/r3_kernel/target/sysroot",
+  "rust.rustflags": ""
+}
