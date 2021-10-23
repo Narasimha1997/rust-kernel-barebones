@@ -55,7 +55,7 @@ function configure_vscode () {
 
     targetpath=$PWD/r3_kernel/x86_64.json_text
     sysrootpath=$PWD/r3_kernel/target/sysroot
-    deppath= "-L dependency=$sysrootpath/lib/rustlib/x86_64-unknown-linux-gnu/lib"
+    deppath="-L dependency=$sysrootpath/lib/rustlib/x86_64-unknown-linux-gnu/lib"
 
     json_text='{
         "rust.target": $targetpath,
