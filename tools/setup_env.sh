@@ -2,7 +2,7 @@
 
 # install qemu if not exist:
 function install_qemu () {
-    if ! command -V qemu-system-x86_64 &> dev/null; then
+    if ! command -v qemu-system-x86_64 &> /dev/null; then
         # change this according to your package name
         echo "Installing Qemu + KVM"
         sudo apt update
@@ -13,10 +13,14 @@ function install_qemu () {
     else
         echo "Qemu with kvm is already installed"
     fi
+
+    if ! command -v jq &> /dev/null; then
+        sudo apt install jq
+    fi
 }
 
 function install_rust_cargo () {
-    if ! command -V cargo &> dev/null; then
+    if ! command -v cargo &> /dev/null; then
         echo "Installing rust and cargo."
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
         echo "Installed rust and cargo."
@@ -35,7 +39,35 @@ function setup_toolchain_env () {
     echo "Done configuring."
 }
 
+function configure_vscode () {
+    echo "Configuring VS code RLS plugin to use custom target."
+
+    if [[ -d ".vscode" ]]; then
+        rm -r .vscode
+    fi
+
+    if [[ -d "r3_kernel/.vscode" ]]; then
+        rm -r r3_kernel/.vscode
+    fi
+
+    mkdir -p .vscode
+    mkdir -p r3_kernel/.vscode
+
+    targetpath=$PWD/r3_kernel/x86_64.json_text
+    sysrootpath=$PWD/r3_kernel/target/sysroot
+
+    json_text='{
+        "rust.target": "$targetpath",
+        "rust.all_targets": false,
+        "rust.sysroot": "$sysrootpath",
+        "rust.rustflags": "-L dependency=$sysrootpath/lib/rustlib/x86_64-unknown-linux-gnu/lib"
+    }'
+
+    jq -n --arg targetpath "$targetpath" --arg sysrootpath "$sysrootpath" $json_text >> .vscode/settings.json
+    jq -n --arg targetpath "$targetpath" --arg sysrootpath "$sysrootpath" $json_text >> r3_kernel/.vscode/settings.json
+}
+
 install_qemu
 install_rust_cargo
 setup_toolchain_env
-
+configure_vscode
