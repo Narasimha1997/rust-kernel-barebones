@@ -1,5 +1,5 @@
 # rust-kernel-barebones
-A minimal rust kernel and a bunch of configuration scripts that can be used to bootstrap Operating system development using Nightly-Rust (x86_64-unknwon-none host-triple) compiler.
+A minimal rust kernel and a bunch of configuration scripts that can be used to bootstrap Operating system development using Nightly-Rust (x86_64-unkown-none host-triple) compiler.
 
 This repository uses tools built by the awesome Rust OsDev [community](https://github.com/rust-osdev) (like xbuild, bootimage, bootloader crates) and configures all of these tools to work together so developers can use them without having to worry much on toochain configuration. The toolchain builds and configures the project to use `x86_64-unknwon-none` target. Some features include:
 
