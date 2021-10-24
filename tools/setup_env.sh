@@ -53,7 +53,7 @@ function configure_vscode () {
     mkdir -p .vscode
     mkdir -p r3_kernel/.vscode
 
-    targetpath=$PWD/r3_kernel/x86_64.json_text
+    targetpath=$PWD/r3_kernel/x86_64.json
     sysrootpath=$PWD/r3_kernel/target/sysroot
     deppath="-L dependency=$sysrootpath/lib/rustlib/x86_64-unknown-linux-gnu/lib"
 

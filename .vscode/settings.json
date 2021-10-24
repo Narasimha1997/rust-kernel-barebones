@@ -1,5 +1,5 @@
 {
-  "rust.target": "/home/narasimha/Documents/rust-kernel-barebones/r3_kernel/x86_64.json_text",
+  "rust.target": "/home/narasimha/Documents/rust-kernel-barebones/r3_kernel/x86_64.json",
   "rust.all_targets": false,
   "rust.sysroot": "/home/narasimha/Documents/rust-kernel-barebones/r3_kernel/target/sysroot",
   "rust.rustflags": "-L dependency=/home/narasimha/Documents/rust-kernel-barebones/r3_kernel/target/sysroot/lib/rustlib/x86_64-unknown-linux-gnu/lib"

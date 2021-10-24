@@ -32,7 +32,7 @@ bash ./tools/setup_env.sh
 
 This will check for tools like qemu, kvm, rustc, cargo and jq. Tools which are not present will be installed and you may need to enter few choices while installation. Next it will download and install few rust crates that are required for the toolchain to work properly. Then the script configures VS code editor to make RLS plugin recognize the `x86_64-unknown-none` target. 
 
-2. Build and run the kernel:
+3. Build and run the kernel:
 To build and run the kernel, just run:
 ```
 bash tools/run_qemu.sh
