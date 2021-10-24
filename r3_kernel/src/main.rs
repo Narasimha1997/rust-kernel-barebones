@@ -17,7 +17,7 @@ fn panic(_info: &PanicInfo) -> ! {
 #[no_mangle] // don't mangle the name of this function
 pub extern "C" fn _start() -> ! {
 
-    // print some characters on the screen and loop
+    // Push some bytes to serial port and loop infinitely.
     let text = "Hello, World!!!";
 
     let io_port = Port::new(0x3f8, false);
