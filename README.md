@@ -1,15 +1,14 @@
 # rust-kernel-barebones
 A minimal 64-bit rust kernel and a bunch of configuration scripts that can be used to bootstrap Operating system development using Nightly-Rust (x86_64-unkown-linux-gnu host-triple) compiler.
 
-This repository uses tools built by the awesome Rust OsDev [community](https://github.com/rust-osdev) (like xbuild, bootimage, bootloader crates) and configures all of these tools to work together so developers can use them without having to worry much on toochain configuration. The toolchain builds and configures the project to use `x86_64-unknwon-none` target. Some features include:
+This repository uses tools built by the awesome Rust OsDev [community](https://github.com/rust-osdev) (like xbuild, bootloader crates) and configures all of these tools to work together so developers can use them without having to worry much on toochain configuration. The toolchain builds and configures the project to use `x86_64-unknwon-none` target. Some features include:
 
 1. A single script that configures the whole environment.
 2. A single script to build the kernel and emulate it using Qemu.
 3. VS Code RLS configuration.
 
 ### Tools used by this barebones:
-1. [bootimage](https://github.com/rust-osdev/bootimage) - A tool that builds the Kernel written in Rust and packages it with bootloader.
-2. [bootloader](https://github.com/rust-osdev/bootloader) - A bootloader written in Rust.
+1. [bootloader](https://github.com/rust-osdev/bootloader) - A bootloader written in Rust.
 3. [cargo-xbuild](https://github.com/rust-osdev/cargo-xbuild) - A tool that takes care of managing nightly rust toolchain.
 
 ### Prerequisites
@@ -52,6 +51,16 @@ bash tools/run_qemu.sh --clean --build
 ```
 
 If everything is successful, the kernel should bootup into a blank screen and qemu should create a `serial.out` file where the kernel will write `Hello, World!!` via a serial port.
+
+### UEFI Mode:
+Normally the kernel will be booted in legacy BIOS mode. In order to enable UEFI mode, pass `--uefi` flag to the `run_qemu.sh`.
+```
+bash tools/run_qemu.sh --uefi
+```
+The UEFI mode uses [Open Virtual Machine Firmware (OVMF)](http://www.linux-kvm.org/downloads/lersek/ovmf-whitepaper-c770f8c.txt) and can be installed via `ovmf` package. The `setup_env.sh` script will install this as well, the UEFI firmware will be added to `qemu-system-x86_64` via `-bios /usr/share/ovmf/OVMF.fd` flag. The `--uefi` flag can be used with other flags as well:
+```
+bash tools/run_qemu.sh --uefi --clean --build
+```
 
 #### Configuring QEMU parameters:
 To use your own custom parameters for qemu emulation, modify `QEMU_ARGS` variable in `tools/run_qemu.sh` file.
