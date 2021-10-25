@@ -9,6 +9,10 @@ function install_qemu () {
         sudo apt install -y qemu-kvm libvirt-dev bridge-utils libvirt-daemon-system \
             libvirt-daemon virtinst bridge-utils libosinfo-bin libguestfs-tools \
             virt-top
+
+        # install ovmf for UEFI boot:
+        sudo apt install -y ovmf
+
         echo "Installed Qemu + KVM"
     else
         echo "Qemu with kvm is already installed"
@@ -32,9 +36,6 @@ function install_rust_cargo () {
 function setup_toolchain_env () {
     echo "Configuring project to use rust nightly cross compiler."
     ./tools/sub/get_cargo_prerequsites.sh
-
-    echo "Building bootimage generator binary locally."
-    ./tools/sub/build_bootimage_binary.sh
 
     echo "Done configuring."
 }
