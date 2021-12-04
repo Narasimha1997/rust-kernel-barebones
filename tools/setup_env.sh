@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH=$PATH:$HOME/.cargo/bin
+
 # install qemu if not exist:
 function install_qemu () {
     if ! command -v qemu-system-x86_64 &> /dev/null; then
